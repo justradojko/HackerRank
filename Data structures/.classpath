@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="Java 1D Array (Easy)/src"/>
+	<classpathentry kind="src" path="Java 1D Array (Hard)/src"/>
+	<classpathentry kind="src" path="Java 2D Array/src"/>
+	<classpathentry kind="src" path="Java Map/src"/>
+	<classpathentry kind="src" path="Java Stack/src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="Java Map/bin"/>
+</classpath>
