@@ -1,54 +1,39 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Stack;
 
 public class Solution {
-	private ArrayList<Character> stringElements;
+	private Stack<Character> stack = new Stack<Character>();
 	
-	private void loadDataAndAnalize(String string){
-		stringElements = new ArrayList<Character>();
-		
-		for (int i = 0; i < string.length(); i++) {
-			stringElements.add(string.charAt(i));
+	private void emptyStack(){
+		while (!stack.empty()) {
+			stack.pop();			
 		}
 	}
 	
-	private boolean analize(){
-		int size = stringElements.size();
-		if(size == 0){
-//			System.out.println("String is empty");
-			return true;
-		}
+	private boolean analize(String string){
+		emptyStack();
 		
-		if(size % 2 == 1){
-//			System.out.println("There is uneven number of parentheses");
-			return false;
-		}
-		
-		int numberOfClosedParentheses = 0;
 		Character chr;
-		
-		for (int i = 1; i < stringElements.size(); i++) {
-			if(i == 0) i = 1;
-			chr = stringElements.get(i);
-			if(  (chr == ')') || (chr == ']') || (chr == '}')){
-				
-				if(checkParentheses(stringElements.get(i-1), chr)){
-					stringElements.remove(i);
-					stringElements.remove(i-1);
-					i -= 2;
-					numberOfClosedParentheses++;
-				} else{
-//					System.out.println("Wrong close parentheses: " + chr + ":" + stringElements.get(i-1));
+		for (int i = 0; i < string.length(); i++) {
+			chr = string.charAt(i);
+			if(  (chr == '(') || (chr == '[') || (chr == '{')){
+				stack.push(chr);
+			} else if(  (chr == ')') || (chr == ']') || (chr == '}')){
+				if (stack.empty()){
 					return false;
+				} else {
+					if ( checkParentheses(stack.peek(), chr)){
+						stack.pop();
+					} else 
+						return false;
 				}
-			}		
+			}
 		}
-		
-		if(numberOfClosedParentheses == (size / 2))
+		if(stack.empty())
 			return true;
-		else {
+		else 
 			return false;
-		}
 	}
 	
 	private boolean checkParentheses(Character c1, Character c2){
@@ -65,8 +50,7 @@ public class Solution {
 	}
 	
 	public void go(String string){
-		this.loadDataAndAnalize(string);
-		System.out.println(this.analize());
+		System.out.println(this.analize(string));
 	}
 	
 	public static void main(String []argh){
@@ -78,7 +62,5 @@ public class Solution {
 	        String input=sc.next();
 	        solution.go(input);
 	    }
-
-		
 	}
 }
